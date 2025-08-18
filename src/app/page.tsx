@@ -82,13 +82,13 @@ export default function Home() {
         <AnimatePresence mode="wait">
           <motion.div
             key={currentSection}
-            initial={{ x: 100, opacity: 0 }}
+            initial={{ x: 0, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: -100, opacity: 0 }}
+            exit={{ x: 0, opacity: 0 }}
             transition={{ 
-              type: "spring", 
-              stiffness: 300, 
-              damping: 30,
+              type: "inertia", 
+              stiffness: 100, 
+              damping: 10,
               opacity: { duration: 0.2 }
             }}
             className="h-full overflow-y-auto custom-scrollbar"
