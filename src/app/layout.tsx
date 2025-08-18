@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Raul Escandon - Full-Stack Developer & AI Solutions Expert",
+  title: "Raul Escandon",
   description: "I help businesses grow through intelligent web applications and AI-powered solutions. Specializing in Next.js, React, and machine learning integration for measurable business results.",
 };
 

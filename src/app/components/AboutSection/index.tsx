@@ -30,30 +30,44 @@ const socialLinks = [
 export default function AboutSection() {
   return (
     <section className="flex items-center justify-center h-full">
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          {/* Profile Picture */}
-          <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-              {/* Placeholder - Replace with actual image */}
-              <span>RP</span>
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-8 items-center">
+          {/* Left side - Title and Description */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="md:order-1"
+          >
+            <h2 className="text-lg font-bold mb-6">About me</h2>
+            <p className="text-sm text-foreground/70 mb-6 leading-relaxed">
+              I'm a full-stack developer and machine learning engineer with a passion for helping businesses 
+              succeed through technology. With expertise in modern web development, AI solutions, and business 
+              process optimization, I focus on delivering measurable results that matter to your bottom line.
+            </p>
+            <p className="text-sm text-foreground/70 mb-8 leading-relaxed">
+              When you work with me, you're not just getting a developer – you're getting a strategic partner 
+              who understands your business goals and knows how to achieve them through smart technology choices.
+            </p>
+          </motion.div>
+
+          {/* Right side - Profile Picture */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="md:order-2 flex justify-center md:justify-center"
+          >
+            <div className="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
+              <img
+                src="/profile.jpg"
+                alt="Profile picture"
+                width={1000}
+                height={1000}
+                className="w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 rounded-full object-cover"
+                loading="lazy"
+              />
             </div>
-          </div>
-          
-          <h2 className="text-3xl font-bold mb-6">About me</h2>
-          <p className="text-lg text-foreground/70 mb-8 leading-relaxed">
-            I'm a full-stack developer and machine learning engineer with a passion for helping businesses 
-            succeed through technology. With expertise in modern web development, AI solutions, and business 
-            process optimization, I focus on delivering measurable results that matter to your bottom line.
-          </p>
-          <p className="text-lg text-foreground/70 mb-8 leading-relaxed">
-            When you work with me, you're not just getting a developer – you're getting a strategic partner 
-            who understands your business goals and knows how to achieve them through smart technology choices.
-          </p>
-        </motion.div>
+          </motion.div>
+        </div>
         <div className="grid md:grid-cols-3 gap-8 mt-12">
           {highlights.map((item, index) => (
             <motion.div
