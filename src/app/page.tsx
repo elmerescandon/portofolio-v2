@@ -16,7 +16,7 @@ import Footer from './components/Footer';
 
 const sections = [
   'hero',
-  'results', 
+  // 'results', 
   'work',
   'services',
   'testimonials',
@@ -43,17 +43,17 @@ export default function Home() {
     switch (currentSection) {
       case 0:
         return <HeroSection goToSection={goToSection} />;
+      // case 1:
+      //   return <ResultsSection />;
       case 1:
-        return <ResultsSection />;
-      case 2:
         return <WorkSection />;
-      case 3:
+      case 2:
         return <ServicesSection />;
-      case 4:
+      case 3:
         return <TestimonialsSection />;
-      case 5:
+      case 4:
         return <AboutSection />;
-      case 6:
+      case 5:
         return <ContactSection />;
       default:
         return <HeroSection goToSection={goToSection} />;

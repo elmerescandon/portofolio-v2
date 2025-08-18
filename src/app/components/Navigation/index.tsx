@@ -22,7 +22,7 @@ export default function Navigation({ currentSection, goToSection }: NavigationPr
         >
           Raul Escandon
         </motion.div>
-        <div className="hidden md:flex space-x-8 items-center">
+        {/* <div className="hidden md:flex space-x-8 items-center">
           {['Home', 'Work', 'Services', 'About'].map((item, index) => (
             <motion.button
               key={item}
@@ -37,7 +37,7 @@ export default function Navigation({ currentSection, goToSection }: NavigationPr
             </motion.button>
           ))}
 
-        </div>
+        </div> */}
         <motion.button
           onClick={() => goToSection(6)}
           className="bg-foreground text-background px-6 py-2 rounded-full text-sm font-medium hover:bg-accent transition-colors"
