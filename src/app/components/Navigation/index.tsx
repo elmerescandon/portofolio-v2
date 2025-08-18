@@ -36,16 +36,17 @@ export default function Navigation({ currentSection, goToSection }: NavigationPr
               {item}
             </motion.button>
           ))}
-          <ThemeToggle />
+
         </div>
-        <motion.button
+        {/* <motion.button
           onClick={() => goToSection(6)}
           className="bg-foreground text-background px-6 py-2 rounded-full text-sm font-medium hover:bg-accent transition-colors"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           Start Project
-        </motion.button>
+        </motion.button> */}
+        <ThemeToggle />
       </nav>
     </motion.header>
   );

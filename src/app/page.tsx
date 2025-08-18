@@ -98,7 +98,7 @@ export default function Home() {
         </AnimatePresence>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }
