@@ -3,19 +3,17 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Navigation from './components/Navigation';
-import SectionIndicators from './components/SectionIndicators';
 import ScrollNavigation from './components/ScrollNavigation';
+import StageNavigation from './components/StageNavigation';
 import HeroSection from './components/HeroSection';
-import ResultsSection from './components/ResultsSection';
 import WorkSection from './components/WorkSection';
 import ServicesSection from './components/ServicesSection';
 import TestimonialsSection from './components/TestimonialsSection';
 import AboutSection from './components/AboutSection';
 import ContactSection from './components/ContactSection';
-import Footer from './components/Footer';
 
 const sections = [
-  'hero',
+  'home',
   // 'results', 
   'work',
   'services',
@@ -64,17 +62,18 @@ export default function Home() {
     <div className="h-screen overflow-hidden bg-background text-foreground">
       <Navigation currentSection={currentSection} goToSection={goToSection} />
       
-      {/* <SectionIndicators 
-        sections={sections} 
-        currentSection={currentSection} 
-        goToSection={goToSection} 
-      /> */}
 
       <ScrollNavigation
         currentSection={currentSection}
         sectionsLength={sections.length}
         nextSection={nextSection}
         prevSection={prevSection}
+      />
+
+      <StageNavigation
+        currentSection={currentSection}
+        sections={sections}
+        goToSection={goToSection}
       />
 
       {/* Main Content Container */}
@@ -97,8 +96,6 @@ export default function Home() {
           </motion.div>
         </AnimatePresence>
       </div>
-
-      {/* <Footer /> */}
     </div>
   );
 }

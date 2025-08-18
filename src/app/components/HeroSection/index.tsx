@@ -44,7 +44,7 @@ export default function HeroSection({ goToSection }: HeroSectionProps) {
               Get Free Consultation
             </motion.button>
             <motion.button
-              onClick={() => goToSection(2)}
+              onClick={() => goToSection(1)}
               className="border border-border px-8 py-4 rounded-full font-medium hover:bg-muted transition-colors text-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
