@@ -10,13 +10,13 @@ const highlights = [
 
 export default function AboutSection() {
   return (
-    <section className="flex items-center justify-center h-full bg-muted">
+    <section className="flex items-center justify-center h-full">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <h2 className="text-3xl font-bold mb-6">About Raul</h2>
+          <h2 className="text-3xl font-bold mb-6">About me</h2>
           <p className="text-lg text-foreground/70 mb-8 leading-relaxed">
             I'm a full-stack developer and machine learning engineer with a passion for helping businesses 
             succeed through technology. With expertise in modern web development, AI solutions, and business 

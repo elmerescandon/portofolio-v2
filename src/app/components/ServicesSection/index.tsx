@@ -22,7 +22,7 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className="flex items-center justify-center h-full bg-muted">
+    <section className="flex items-center justify-center h-full">
       <div className="max-w-6xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -42,7 +42,7 @@ export default function ServicesSection() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="bg-background p-8 rounded-lg"
+              className="bg-background p-8 rounded-lg border border-border"
             >
               <h3 className="text-xl font-bold mb-4">{service.title}</h3>
               <p className="text-foreground/70 mb-6">{service.description}</p>

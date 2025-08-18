@@ -10,7 +10,7 @@ const stats = [
 
 export default function ResultsSection() {
   return (
-    <section className="flex items-center justify-center h-full bg-muted">
+    <section className="flex items-center justify-center h-full">
       <div className="max-w-6xl mx-auto px-6 text-center">
         <motion.h2 
           initial={{ opacity: 0, y: 30 }}

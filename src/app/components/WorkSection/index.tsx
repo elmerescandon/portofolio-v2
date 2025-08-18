@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 
+
 const projects = [
   {
     title: "E-commerce Platform Optimization",
@@ -38,7 +39,8 @@ const projects = [
 export default function WorkSection() {
   return (
     <section className="h-full overflow-y-auto custom-scrollbar">
-      <div className="max-w-6xl mx-auto px-6 py-12">
+
+      <div className="max-w-6xl mx-auto px-6 py-12 mb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}

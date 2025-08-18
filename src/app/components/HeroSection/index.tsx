@@ -17,8 +17,8 @@ export default function HeroSection({ goToSection }: HeroSectionProps) {
             transition={{ delay: 0.2 }}
             className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
           >
-            I build intelligent web applications that 
-            <span className="text-accent"> grow your business</span>
+            I build intelligent web applications that  
+            <span className="text-foreground font-bold ml-4 rounded-md bg-green-500 px-2">grow your business</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}

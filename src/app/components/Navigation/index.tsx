@@ -23,12 +23,12 @@ export default function Navigation({ currentSection, goToSection }: NavigationPr
           Raul Escandon
         </motion.div>
         <div className="hidden md:flex space-x-8 items-center">
-          {['Work', 'Services', 'About'].map((item, index) => (
+          {['Home', 'Work', 'Services', 'About'].map((item, index) => (
             <motion.button
               key={item}
-              onClick={() => goToSection(index + 2)}
+              onClick={() => goToSection(index + 1)}
               className={`text-foreground/70 hover:text-foreground transition-colors ${
-                currentSection === index + 2 ? 'text-foreground font-medium' : ''
+                currentSection === index + 1 ? 'text-foreground font-medium' : ''
               }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -38,15 +38,15 @@ export default function Navigation({ currentSection, goToSection }: NavigationPr
           ))}
 
         </div>
-        {/* <motion.button
+        <motion.button
           onClick={() => goToSection(6)}
           className="bg-foreground text-background px-6 py-2 rounded-full text-sm font-medium hover:bg-accent transition-colors"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
           Start Project
-        </motion.button> */}
-        <ThemeToggle />
+        </motion.button>
+        {/* <ThemeToggle /> */}
       </nav>
     </motion.header>
   );
