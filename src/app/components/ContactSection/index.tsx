@@ -44,6 +44,7 @@ export default function ContactSection() {
             <textarea 
               placeholder="Tell me about your project and business goals..." 
               rows={5}
+              required
               className="w-full p-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent/20"
             ></textarea>
             <motion.button 
@@ -66,11 +67,11 @@ export default function ContactSection() {
           <p className="text-foreground/70 mb-4">Prefer to reach out directly?</p>
           <div className="flex justify-center gap-8">
             <a href="mailto:hello@raulescandon.com" className="text-foreground hover:text-accent transition-colors">
-              hello@raulescandon.com
+              elmer.escandontufino@gmail.com
             </a>
-            <a href="tel:+1234567890" className="text-foreground hover:text-accent transition-colors">
-              +1 (234) 567-8900
-            </a>
+            {/* <a href="tel:+525533123456" className="text-foreground hover:text-accent transition-colors">
+              +52 55 3312 3456
+            </a> */}
           </div>
         </motion.div>
       </div>

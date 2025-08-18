@@ -24,7 +24,7 @@ export default function Navigation({ currentSection, goToSection }: NavigationPr
             className="font-medium text-lg"
             whileHover={{ scale: 1.05 }}
           >
-            Raul Escandon
+            Raúl Escandón
           </motion.div>
           {/* <div className="hidden md:flex space-x-8 items-center">
             {['Home', 'Work', 'Services', 'About'].map((item, index) => (
