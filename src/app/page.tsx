@@ -64,11 +64,11 @@ export default function Home() {
     <div className="h-screen overflow-hidden bg-background text-foreground">
       <Navigation currentSection={currentSection} goToSection={goToSection} />
       
-      <SectionIndicators 
+      {/* <SectionIndicators 
         sections={sections} 
         currentSection={currentSection} 
         goToSection={goToSection} 
-      />
+      /> */}
 
       <ScrollNavigation
         currentSection={currentSection}
