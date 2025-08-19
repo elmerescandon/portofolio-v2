@@ -18,7 +18,7 @@ export default function HeroSection({ goToSection }: HeroSectionProps) {
             className="text-4xl md:text-6xl font-bold mb-6 leading-tight"
           >
             I build intelligent web applications that  
-            <span className="text-foreground font-bold ml-4 rounded-md bg-green-500 px-2">grow your business</span>
+            <span className="text-background font-bold ml-4 rounded-md bg-green-700 dark:bg-green-500 px-2">grow your business</span>
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
