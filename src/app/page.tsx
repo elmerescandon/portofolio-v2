@@ -17,7 +17,7 @@ const sections = [
   // 'results', 
   'work',
   'services',
-  'testimonials',
+  // 'testimonials',
   'about',
   'contact'
 ];
@@ -47,11 +47,11 @@ export default function Home() {
         return <WorkSection />;
       case 2:
         return <ServicesSection />;
+      // case 3:
+      //   return <TestimonialsSection />;
       case 3:
-        return <TestimonialsSection />;
-      case 4:
         return <AboutSection />;
-      case 5:
+      case 4:
         return <ContactSection />;
       default:
         return <HeroSection goToSection={goToSection} />;

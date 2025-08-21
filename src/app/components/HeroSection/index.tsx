@@ -36,7 +36,7 @@ export default function HeroSection({ goToSection }: HeroSectionProps) {
             className="flex flex-col sm:flex-row gap-4"
           >
             <motion.button
-              onClick={() => goToSection(6)}
+              onClick={() => goToSection(4)}
               className="bg-foreground text-background px-8 py-4 rounded-full font-medium hover:bg-accent transition-colors text-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

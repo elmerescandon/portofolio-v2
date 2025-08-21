@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function ContactSection() {
   return (
-    <section className="flex items-center justify-center h-full">
+    <section className="flex items-center justify-start h-full">
       <div className="max-w-4xl mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -21,7 +21,7 @@ export default function ContactSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-muted p-8 rounded-lg max-w-2xl mx-auto"
+          className="bg-muted rounded-lg max-w-2xl mx-auto p-8"
         >
           <form className="space-y-6">
             <div className="grid md:grid-cols-2 gap-4">
@@ -62,11 +62,11 @@ export default function ContactSection() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="text-center mt-12"
+          className="text-center mt-4"
         >
-          <p className="text-foreground/70 mb-4">Prefer to reach out directly?</p>
-          <div className="flex justify-center gap-8">
-            <a href="mailto:hello@raulescandon.com" className="text-foreground hover:text-accent transition-colors">
+          <div className="flex justify-center gap-2">
+            <p className="text-foreground/70 mb-4">Prefer to reach out directly? Email me at</p>
+            <a href="mailto:elmer.escandontufino@gmail.com" className="text-foreground hover:text-accent transition-colors underline cursor-pointer">
               elmer.escandontufino@gmail.com
             </a>
             {/* <a href="tel:+525533123456" className="text-foreground hover:text-accent transition-colors">
