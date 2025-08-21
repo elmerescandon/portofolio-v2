@@ -8,10 +8,10 @@ import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "Web Experience Enhancement",
-    description: "Enhanced Promart Homecenter’s (Intercorp Retail, Peru's largest retail group) website for faster load times and easier navigation.",
+    title: "Promart Homepage Enhancement",
+    description: "Enhanced Promart Homecenter’s (largest home center store in Peru) website for faster load times and easier navigation.",
     results: [
-      "Automated all product inventory processes, cutting daily manual workload by 10%",
+      "Automated all product inventory processes",
       "Average visit duration increased by 30%",
       "100% accomplishment of the project's goals"
     ],
@@ -21,13 +21,13 @@ const projects = [
   },
   {
     title: "Wize E-commerce Platform",
-    description: "Built an e-commerce platform for Wize, a Peruvian startup that provides a platform for small businesses to manage their inventory and sales.",
+    description: "Built an e-commerce platform for Wize, a Peruvian e-commerce platform of audio products.",
     results: [
-      "Fully automated product inventory processes, cutting daily manual workload by 10%",
-      "Average visit duration increased by 30%",
-      "100% accomplishment of the project's goals"
+      "Fully automated product inventory processes",
+      "Integration with Payment and Analytics tools",
     ],
-    tech: "React • Google Cloud Platform • VTEX API & CMS",
+    image: "/images/wize.jpg",
+    tech: "Wordpress • WooCommerce • MercadoPago • Mailchimp • Google Analytics",
     url: "https://www.wize.pe/"  
   },
   // {
