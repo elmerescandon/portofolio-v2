@@ -1,8 +1,47 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 export default function ContactSection() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', company: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
   return (
     <section className="flex items-center justify-start h-full">
       <div className="max-w-4xl mx-auto px-6">
@@ -23,37 +62,73 @@ export default function ContactSection() {
           transition={{ delay: 0.2 }}
           className="bg-muted rounded-lg max-w-2xl mx-auto p-8"
         >
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid md:grid-cols-2 gap-4">
               <input 
                 type="text" 
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="Your Name" 
+                required
                 className="w-full p-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent/20"
               />
               <input 
                 type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="Your Email" 
+                required
                 className="w-full p-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent/20"
               />
             </div>
             <input 
               type="text" 
+              name="company"
+              value={formData.company}
+              onChange={handleChange}
               placeholder="Company Name" 
               className="w-full p-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent/20"
             />
             <textarea 
+              name="message"
+              value={formData.message}
+              onChange={handleChange}
               placeholder="Tell me about your project and business goals..." 
               rows={5}
               required
               className="w-full p-4 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-accent/20"
             ></textarea>
+            
+            {/* {submitStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-green-100 border border-green-300 rounded-lg text-green-700"
+              >
+                Message sent successfully! I'll get back to you soon.
+              </motion.div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 bg-red-100 border border-red-300 rounded-lg text-red-700"
+              >
+                Failed to send message. Please try again or email me directly.
+              </motion.div>
+            )} */}
+            
             <motion.button 
               type="submit" 
-              className="w-full bg-foreground text-background p-4 rounded-lg font-medium hover:bg-accent transition-colors"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              disabled={isSubmitting}
+              className="w-full bg-foreground text-background p-4 rounded-lg font-medium hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>
           </form>
         </motion.div>
