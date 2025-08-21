@@ -15,43 +15,25 @@ export default function Navigation({ currentSection, goToSection }: NavigationPr
       animate={{ y: 0 }}
       className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-sm border-b border-border z-50"
     >
-      <nav className="w-full mx-auto px-6 py-4 flex justify-between items-center">
-        <div>
-          
-        </div>
-        <div className="max-w-3xl w-full flex items-center justify-between space-x-8">
-          <motion.div 
-            className="font-medium text-lg"
-            whileHover={{ scale: 1.05 }}
-          >
-            Raúl Escandón
-          </motion.div>
-          {/* <div className="hidden md:flex space-x-8 items-center">
-            {['Home', 'Work', 'Services', 'About'].map((item, index) => (
-              <motion.button
-                key={item}
-                onClick={() => goToSection(index + 1)}
-                className={`text-foreground/70 hover:text-foreground transition-colors ${
-                  currentSection === index + 1 ? 'text-foreground font-medium' : ''
-                }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item}
-              </motion.button>
-            ))}
-
-          </div> */}
+      <nav className="w-full mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
+        <motion.div 
+          className="font-medium text-base sm:text-lg"
+          whileHover={{ scale: 1.05 }}
+        >
+          Raúl Escandón
+        </motion.div>
+        
+        <div className="flex items-center gap-3 sm:gap-4">
           <motion.button
             onClick={() => goToSection(4)}
-            className="bg-foreground border border-foreground text-background px-6 py-2 rounded-full text-sm font-medium hover:bg-muted hover:border-foreground hover:text-foreground transition-colors"
+            className="bg-foreground border border-foreground text-background px-4 sm:px-6 py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-muted hover:border-foreground hover:text-foreground transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             Let's talk
           </motion.button>
+          <ThemeToggle />
         </div>
-        <ThemeToggle />
       </nav>
     </motion.header>
   );

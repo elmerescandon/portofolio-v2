@@ -22,33 +22,36 @@ const services = [
 
 export default function ServicesSection() {
   return (
-    <section className="flex items-center justify-center h-full">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="h-full overflow-y-auto custom-scrollbar">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">How I Help Your Business Grow</h2>
-          <p className="text-foreground/70 text-lg max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">How I Help Your Business Grow</h2>
+          <p className="text-foreground/70 text-base sm:text-lg max-w-2xl mx-auto">
             Strategic technology solutions that deliver measurable business value
           </p>
         </motion.div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((service, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="bg-background p-8 rounded-lg border border-border"
+              className="bg-background p-6 sm:p-8 rounded-lg border border-border"
             >
-              <h3 className="text-xl font-bold mb-4">{service.title}</h3>
-              <p className="text-foreground/70 mb-6">{service.description}</p>
+              <h3 className="text-lg sm:text-xl font-bold mb-4">{service.title}</h3>
+              <p className="text-foreground/70 mb-6 text-sm sm:text-base leading-relaxed">{service.description}</p>
               <ul className="space-y-2 text-sm">
                 {service.features.map((feature, idx) => (
-                  <li key={idx}>• {feature}</li>
+                  <li key={idx} className="flex items-start gap-2">
+                    <span className="text-accent font-bold">•</span>
+                    <span>{feature}</span>
+                  </li>
                 ))}
               </ul>
             </motion.div>

@@ -12,7 +12,7 @@ const StageNavigation: React.FC<StageNavigationProps> = ({
   goToSection,
 }) => {
   return (
-    <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden md:block">
+    <nav className="fixed left-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
       <div className="flex flex-col gap-3">
         {sections.map((section, index) => (
           <button

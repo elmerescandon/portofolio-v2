@@ -57,42 +57,42 @@ const projects = [
 export default function WorkSection() {
   return (
     <section className="h-full overflow-y-auto custom-scrollbar">
-
-      <div className="max-w-6xl mx-auto px-6 py-12 mb-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 mb-8 sm:mb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
+          className="text-center sm:text-left"
         >
-          <h2 className="text-3xl font-bold mb-4">Featured Work</h2>
-          <p className="text-foreground/70 mb-12 text-lg">Real projects, real results for real businesses</p>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-4">Featured Work</h2>
+          <p className="text-foreground/70 mb-8 sm:mb-12 text-base sm:text-lg">Real projects, real results for real businesses</p>
         </motion.div>
         
-        <div className="space-y-16">
+        <div className="space-y-12 sm:space-y-16">
           {projects.map((project, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
-              className="grid lg:grid-cols-2 gap-12 items-center"
+              className="grid lg:grid-cols-2 gap-8 sm:gap-12 items-center"
             >
               <div className={index % 2 === 1 ? "lg:order-2" : ""}>
-                <div className="flex items-center gap-2 mb-4">
-                  <h3 className="text-2xl font-bold">{project.title}</h3>
-                  <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
-                    <ExternalLink size={20} className="text-accent hover:text-accent-foreground" />
+                <div className="flex items-start sm:items-center gap-2 mb-4">
+                  <h3 className="text-xl sm:text-2xl font-bold leading-tight">{project.title}</h3>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" className="block flex-shrink-0 mt-1 sm:mt-0">
+                    <ExternalLink size={18} className="text-accent hover:text-accent-foreground" />
                   </a>
                 </div>
-                <p className="text-foreground/70 mb-6">{project.description}</p>
+                <p className="text-foreground/70 mb-6 text-sm sm:text-base leading-relaxed">{project.description}</p>
                 <div className="space-y-3 mb-6">
                   {project.results.map((result, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-accent rounded-full"></div>
-                      <span>{result}</span>
+                    <div key={idx} className="flex items-start gap-3">
+                      <div className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></div>
+                      <span className="text-sm sm:text-base">{result}</span>
                     </div>
                   ))}
                 </div>
-                <div className="text-sm text-foreground/60">{project.tech}</div>
+                <div className="text-xs sm:text-sm text-foreground/60 leading-relaxed">{project.tech}</div>
               </div>
               <div className={`${index % 2 === 1 ? "lg:order-1" : ""}`}>
                 <div className="group relative">
