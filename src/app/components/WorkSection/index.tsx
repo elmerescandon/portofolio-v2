@@ -8,6 +8,18 @@ import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
+    title: "Arkangel AI, healthcare transformation",
+    description: "Developing in Arkangel AI, a platform for healthcare that assists doctors in diagnosing and treating patients. ",
+    results: [
+      "Implemented a monitoring system that stores up to 20,000 patients.",
+      "Analyzed +34,000 medical records to improve patient care.",
+      "Developed a platform that allows doctors to diagnose and treat patients with the help of AI."
+    ],
+    image: "/images/arkangel.jpg",
+    tech: "React • Next.js • Agentic Artificial Intelligence • AWS • Supabase • Stripe",
+    url: "https://www.arkangel.ai/"  
+  },
+  {
     title: "Promart Homepage Enhancement",
     description: "Enhanced Promart Homecenter’s (largest home center store in Peru) website for faster load times and easier navigation.",
     results: [
