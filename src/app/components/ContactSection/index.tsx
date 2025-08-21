@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { toast } from 'sonner';
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -28,11 +29,14 @@ export default function ContactSection() {
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', company: '', message: '' });
+        toast.success('Message sent successfully! I\'ll get back to you soon.');
       } else {
         setSubmitStatus('error');
+        toast.error('Failed to send message. Please try again or email me directly.');
       }
     } catch (error) {
       setSubmitStatus('error');
+      toast.error('Failed to send message. Please try again or email me directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -124,7 +128,7 @@ export default function ContactSection() {
             <motion.button 
               type="submit" 
               disabled={isSubmitting}
-              className="w-full bg-foreground text-background p-4 rounded-lg font-medium hover:bg-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-foreground border border-foreground text-background p-4 rounded-lg font-medium hover:bg-muted hover:border-foreground hover:text-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
               whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
             >
