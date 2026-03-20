@@ -2,14 +2,19 @@
 
 import { useEffect, useRef, useCallback } from "react";
 
-const MAX_DROPS = 20;
-const DROP_INTERVAL_MIN = 500;
-const DROP_INTERVAL_MAX = 1500;
-const RIPPLE_SPEED = 70; // px/s
-const MAX_RADIUS = 400;
-const RING_SPACING = 18;
-const RING_COUNT = 14;
-const LINE_WIDTH = 0.7;
+function getConfig(width: number) {
+  const mobile = width < 768;
+  return {
+    maxDrops: mobile ? 8 : 20,
+    dropIntervalMin: mobile ? 900 : 500,
+    dropIntervalMax: mobile ? 2200 : 1500,
+    rippleSpeed: 70,
+    maxRadius: mobile ? 250 : 400,
+    ringSpacing: 18,
+    ringCount: mobile ? 8 : 14,
+    lineWidth: 0.7,
+  };
+}
 
 interface Drop {
   x: number;
@@ -25,6 +30,8 @@ export default function RaindropEffect() {
   const nextDropRef = useRef(300);
   const startTimeRef = useRef<number | null>(null);
 
+  const configRef = useRef(getConfig(0));
+
   const spawnDrop = useCallback((time: number, w: number, h: number) => {
     dropsRef.current.push({
       x: Math.random() * w,
@@ -32,7 +39,7 @@ export default function RaindropEffect() {
       startTime: time,
       strength: 0.5 + Math.random() * 0.5,
     });
-    if (dropsRef.current.length > MAX_DROPS) {
+    if (dropsRef.current.length > configRef.current.maxDrops) {
       dropsRef.current.shift();
     }
   }, []);
@@ -53,6 +60,7 @@ export default function RaindropEffect() {
       canvas!.width = w * dpr;
       canvas!.height = h * dpr;
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      configRef.current = getConfig(w);
     }
 
     resize();
@@ -62,11 +70,13 @@ export default function RaindropEffect() {
       if (!startTimeRef.current) startTimeRef.current = timestamp;
       const elapsed = timestamp - startTimeRef.current;
 
+      const cfg = configRef.current;
+
       // Spawn drops
       if (elapsed >= nextDropRef.current) {
         spawnDrop(elapsed, w, h);
         nextDropRef.current =
-          elapsed + DROP_INTERVAL_MIN + Math.random() * (DROP_INTERVAL_MAX - DROP_INTERVAL_MIN);
+          elapsed + cfg.dropIntervalMin + Math.random() * (cfg.dropIntervalMax - cfg.dropIntervalMin);
       }
 
       ctx!.clearRect(0, 0, w, h);
@@ -76,16 +86,16 @@ export default function RaindropEffect() {
       for (let d = 0; d < drops.length; d++) {
         const drop = drops[d];
         const age = (elapsed - drop.startTime) / 1000;
-        const baseRadius = age * RIPPLE_SPEED;
+        const baseRadius = age * cfg.rippleSpeed;
 
-        if (baseRadius - RING_COUNT * RING_SPACING > MAX_RADIUS) continue;
+        if (baseRadius - cfg.ringCount * cfg.ringSpacing > cfg.maxRadius) continue;
 
-        for (let r = 0; r < RING_COUNT; r++) {
-          const radius = baseRadius - r * RING_SPACING;
-          if (radius <= 0 || radius > MAX_RADIUS) continue;
+        for (let r = 0; r < cfg.ringCount; r++) {
+          const radius = baseRadius - r * cfg.ringSpacing;
+          if (radius <= 0 || radius > cfg.maxRadius) continue;
 
           // Smooth exponential fade
-          const radiusFade = Math.exp(-radius / (MAX_RADIUS * 0.4));
+          const radiusFade = Math.exp(-radius / (cfg.maxRadius * 0.4));
           const ringFade = Math.exp(-r * 0.25);
           let opacity = radiusFade * ringFade * drop.strength * 0.22;
 
@@ -94,18 +104,16 @@ export default function RaindropEffect() {
             if (e === d) continue;
             const other = drops[e];
             const otherAge = (elapsed - other.startTime) / 1000;
-            const otherWavefront = otherAge * RIPPLE_SPEED;
+            const otherWavefront = otherAge * cfg.rippleSpeed;
 
             const dx = drop.x - other.x;
             const dy = drop.y - other.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
 
-            // Check if any of the other drop's rings are near this radius from this drop's center
-            for (let or2 = 0; or2 < RING_COUNT; or2++) {
-              const otherRing = otherWavefront - or2 * RING_SPACING;
+            for (let or2 = 0; or2 < cfg.ringCount; or2++) {
+              const otherRing = otherWavefront - or2 * cfg.ringSpacing;
               if (otherRing <= 0) continue;
 
-              // Distance from other drop center to a point on this ring at closest approach
               const overlap = Math.abs(dist - otherRing - radius);
               if (overlap < 8) {
                 const boost = (1 - overlap / 8) * other.strength * 0.06;
@@ -120,7 +128,7 @@ export default function RaindropEffect() {
           ctx!.beginPath();
           ctx!.arc(drop.x, drop.y, radius, 0, Math.PI * 2);
           ctx!.strokeStyle = `rgba(26, 26, 26, ${opacity})`;
-          ctx!.lineWidth = LINE_WIDTH;
+          ctx!.lineWidth = cfg.lineWidth;
           ctx!.stroke();
         }
       }
@@ -128,8 +136,8 @@ export default function RaindropEffect() {
       // Remove dead drops
       dropsRef.current = drops.filter((drop) => {
         const age = (elapsed - drop.startTime) / 1000;
-        const baseRadius = age * RIPPLE_SPEED;
-        return baseRadius - RING_COUNT * RING_SPACING <= MAX_RADIUS;
+        const baseRadius = age * cfg.rippleSpeed;
+        return baseRadius - cfg.ringCount * cfg.ringSpacing <= cfg.maxRadius;
       });
 
       frameRef.current = requestAnimationFrame(animate);
