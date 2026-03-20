@@ -48,31 +48,16 @@
   --font-mono: var(--font-space-mono);
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  overflow: hidden;
+  height: 100vh;
 }
 
 body {
   font-family: var(--font-raleway), system-ui, sans-serif;
   background-color: var(--background);
   color: var(--foreground);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--muted);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-blue);
 }
 
 @layer base {

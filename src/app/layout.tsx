@@ -4,7 +4,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
-
+import { SectionProvider } from "./context/SectionContext";
 
 const raleway = Raleway({
   variable: "--font-raleway",
@@ -31,10 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${raleway.variable} ${spaceMono.variable} antialiased`}>
-        <NavBar />
-        <main>{children}</main>
-        <Footer />
-        <Toaster />
+        <SectionProvider>
+          <NavBar />
+          {children}
+          <Footer />
+          <Toaster />
+        </SectionProvider>
       </body>
     </html>
   );
