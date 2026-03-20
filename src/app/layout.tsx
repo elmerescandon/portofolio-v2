@@ -1,22 +1,26 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Raleway, Space_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "./context/ThemeContext";
 import { Toaster } from "@/components/ui/sonner";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
+import { SectionProvider } from "./context/SectionContext";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const raleway = Raleway({
+  variable: "--font-raleway",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
   title: "Raul Escandon",
-  description: "I help businesses grow through intelligent web applications and AI-powered solutions. Specializing in Next.js, React, and machine learning integration for measurable business results.",
+  description:
+    "Developer, researcher, and builder. I create intelligent web applications and open source tools that make a real difference.",
 };
 
 export default function RootLayout({
@@ -26,13 +30,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <ThemeProvider>
+      <body className={`${raleway.variable} ${spaceMono.variable} antialiased`}>
+        <SectionProvider>
+          <NavBar />
           {children}
-        </ThemeProvider>
-        <Toaster/>
+          <Footer />
+          <Toaster />
+        </SectionProvider>
       </body>
     </html>
   );
