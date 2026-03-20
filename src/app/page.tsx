@@ -1,101 +1,31 @@
-'use client';
-
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState } from 'react';
-import Navigation from './components/Navigation';
-import ScrollNavigation from './components/ScrollNavigation';
-import StageNavigation from './components/StageNavigation';
-import HeroSection from './components/HeroSection';
-import WorkSection from './components/WorkSection';
-import ServicesSection from './components/ServicesSection';
-import TestimonialsSection from './components/TestimonialsSection';
-import AboutSection from './components/AboutSection';
-import ContactSection from './components/ContactSection';
-
-const sections = [
-  'home',
-  // 'results', 
-  'work',
-  'services',
-  // 'testimonials',
-  'about',
-  'contact'
-];
+import BackgroundEffect from "./components/BackgroundEffect";
 
 export default function Home() {
-  const [currentSection, setCurrentSection] = useState(0);
-
-  const nextSection = () => {
-    setCurrentSection(prev => prev < sections.length - 1 ? prev + 1 : prev);
-  };
-
-  const prevSection = () => {
-    setCurrentSection(prev => prev > 0 ? prev - 1 : prev);
-  };
-
-  const goToSection = (index: number) => {
-    setCurrentSection(index);
-  };
-
-  const renderSection = () => {
-    switch (currentSection) {
-      case 0:
-        return <HeroSection goToSection={goToSection} />;
-      // case 1:
-      //   return <ResultsSection />;
-      case 1:
-        return <WorkSection />;
-      case 2:
-        return <ServicesSection />;
-      // case 3:
-      //   return <TestimonialsSection />;
-      case 3:
-        return <AboutSection />;
-      case 4:
-        return <ContactSection />;
-      default:
-        return <HeroSection goToSection={goToSection} />;
-    }
-  };
-
   return (
-    <div className="h-screen overflow-hidden bg-background text-foreground">
-      <Navigation currentSection={currentSection} goToSection={goToSection} />
-      
+    <div className="min-h-screen">
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 md:px-12 text-center relative overflow-hidden">
+        <BackgroundEffect>
+          <h1 className="font-black text-[clamp(2rem,6vw,5rem)] leading-[0.9] lowercase tracking-[0.02em]">
+            raul escandon
+          </h1>
 
-      <ScrollNavigation
-        currentSection={currentSection}
-        sectionsLength={sections.length}
-        nextSection={nextSection}
-        prevSection={prevSection}
-      />
+          <p className="max-w-lg text-base md:text-lg leading-relaxed font-light mt-6 lowercase">
+            i <span className="text-accent-green font-medium">build</span> things that create a{" "}
+            <span className="text-accent-blue font-medium">better place</span>
+          </p>
 
-      <StageNavigation
-        currentSection={currentSection}
-        sections={sections}
-        goToSection={goToSection}
-      />
-
-      {/* Main Content Container */}
-      <div className="h-full pt-16 sm:pt-20 relative overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentSection}
-            initial={{ x: 0, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 0, opacity: 0 }}
-            transition={{ 
-              type: "inertia", 
-              stiffness: 100, 
-              damping: 10,
-              opacity: { duration: 0.2 }
-            }}
-            className="h-full overflow-y-auto custom-scrollbar"
-          >
-            {renderSection()}
-          </motion.div>
-        </AnimatePresence>
-      </div>
+          <div className="flex gap-2 mt-6 justify-center">
+            <div className="w-8 h-8 bg-accent-brown" />
+            <div className="w-8 h-8 bg-accent-red" />
+            <div className="w-8 h-8 bg-accent-orange" />
+            <div className="w-8 h-8 bg-accent-yellow" />
+            <div className="w-8 h-8 bg-accent-green" />
+            <div className="w-8 h-8 bg-accent-blue" />
+            <div className="w-8 h-8 bg-accent-pink" />
+            <div className="w-8 h-8 bg-accent-gray" />
+          </div>
+        </BackgroundEffect>
+      </section>
     </div>
   );
 }
