@@ -41,10 +41,10 @@ export default function Home() {
           </h1>
 
           <p className="max-w-lg text-base md:text-lg leading-relaxed font-light mt-6 lowercase">
-            building technology by{" "}
+            building technology driven by{" "}
             <span className="text-accent-orange font-medium">curiosity</span>{" "}
-            and a goal to{" "}
-            <span className="text-accent-green font-medium whitespace-nowrap">bridge inequalities</span>
+            and a desire to{" "}
+            <span className="text-accent-green font-medium whitespace-nowrap">reduce inequality</span>.
           </p>
 
           <div className="grid grid-cols-4 md:grid-cols-8 gap-1.5 mt-6 mx-auto">
