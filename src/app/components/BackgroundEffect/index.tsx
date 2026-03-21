@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { Droplets, Waves } from "lucide-react";
 import BauhausWaves from "../BauhausWaves";
 import RaindropEffect from "../RaindropEffect";
 
@@ -46,10 +47,11 @@ export default function BackgroundEffect({ children, isVisible = true }: Props) 
       {isVisible && (
         <button
           onClick={toggle}
-          className="fixed top-4 left-4 md:left-6 z-[60] font-sans text-[10px] md:text-xs font-bold lowercase tracking-[0.2em] px-3 md:px-4 py-2 bg-foreground/80 backdrop-blur-sm text-background hover:bg-foreground transition-colors"
-          aria-label="Toggle background animation"
+          className="fixed top-4 left-4 md:left-6 z-[60] font-sans text-[10px] md:text-xs font-bold lowercase tracking-[0.2em] min-w-[44px] min-h-[44px] md:min-w-0 md:min-h-0 flex items-center justify-center md:px-4 md:py-2 bg-foreground/80 backdrop-blur-sm text-background hover:bg-foreground transition-colors"
+          aria-label={`Switch to ${mode === "waves" ? "rain" : "waves"} effect`}
         >
-          {mode === "waves" ? "rain" : "waves"}
+          <span className="md:hidden">{mode === "waves" ? <Droplets size={18} /> : <Waves size={18} />}</span>
+          <span className="hidden md:inline">{mode === "waves" ? "rain" : "waves"}</span>
         </button>
       )}
 
