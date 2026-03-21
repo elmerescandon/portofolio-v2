@@ -33,11 +33,11 @@ function PaperCard({ paper, index }: { paper: Paper; index: number }) {
       href={`https://doi.org/${paper.doi}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col gap-2 py-5 border-b border-foreground/10 last:border-b-0"
+      className="group flex flex-col gap-1.5 py-3 md:py-3 lg:py-5 border-b border-foreground/10 last:border-b-0"
     >
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex items-start justify-between gap-3">
         <h3
-          className={`font-black text-base md:text-lg lowercase tracking-[0.02em] leading-snug ${accent.title} group-hover:opacity-70 transition-opacity`}
+          className={`font-black text-sm md:text-sm lg:text-base xl:text-lg lowercase tracking-[0.02em] leading-snug line-clamp-2 md:line-clamp-3 lg:line-clamp-none ${accent.title} group-hover:opacity-70 transition-opacity`}
         >
           {paper.title}
         </h3>
@@ -48,19 +48,19 @@ function PaperCard({ paper, index }: { paper: Paper; index: number }) {
         )}
       </div>
 
-      <p className="font-mono text-[11px] text-foreground/50 lowercase tracking-wide leading-relaxed">
+      <p className="font-mono text-[10px] lg:text-[11px] text-foreground/50 lowercase tracking-wide leading-relaxed line-clamp-1">
         {paper.authors}
       </p>
 
-      <div className="flex items-center gap-3 mt-0.5 flex-wrap">
-        <span className={`font-mono text-[10px] lowercase tracking-wider ${typeBadge[paper.type]}`}>
+      <div className="flex items-center gap-2 flex-nowrap overflow-hidden">
+        <span className={`font-mono text-[10px] lowercase tracking-wider shrink-0 ${typeBadge[paper.type]}`}>
           {typeLabel[paper.type]}
         </span>
-        <span className="text-foreground/20 text-xs">·</span>
-        <span className="font-mono text-[10px] text-foreground/40 lowercase tracking-wide">
+        <span className="text-foreground/20 text-xs shrink-0">·</span>
+        <span className="font-mono text-[10px] text-foreground/40 lowercase tracking-wide truncate">
           {paper.venue}
         </span>
-        <span className="text-foreground/20 text-xs">·</span>
+        <span className="text-foreground/20 text-xs shrink-0">·</span>
         <span className="font-mono text-[10px] text-foreground/40 shrink-0">{paper.year}</span>
       </div>
     </a>
@@ -80,7 +80,7 @@ function Pagination({
 }) {
   if (total <= 1) return null;
   return (
-    <div className="flex items-center justify-between pt-6 mt-2 border-t border-foreground/10">
+    <div className="flex items-center justify-between pt-3 lg:pt-6 border-t border-foreground/10 shrink-0">
       <button
         onClick={onPrev}
         disabled={page === 0}
@@ -122,23 +122,24 @@ export default function ContributionsSection() {
   }
 
   return (
-    <section className="min-h-full bg-background flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-28">
-      <div className="mb-4 md:mb-6">
-        <h2 className="font-black text-[clamp(2rem,6vw,5rem)] leading-[0.9] lowercase tracking-[0.05em]">
+    <section className="h-full bg-background flex flex-col px-6 md:px-12 pt-16 md:pt-20 pb-16">
+      {/* Header */}
+      <div className="mb-2 md:mb-3 lg:mb-6 shrink-0">
+        <h2 className="font-black text-[clamp(1.75rem,5vw,5rem)] leading-[0.9] lowercase tracking-[0.05em]">
           contributions
         </h2>
-        <p className="font-mono text-sm tracking-[0.2em] lowercase mt-2 text-foreground/50">
+        <p className="font-mono text-xs lg:text-sm tracking-[0.2em] lowercase mt-1 lg:mt-2 text-foreground/50">
           what i&apos;ve been building
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-foreground/20 mb-6 md:mb-8">
+      <div className="flex border-b border-foreground/20 mb-3 md:mb-4 lg:mb-8 shrink-0">
         {tabs.map((tab) => (
           <button
             key={tab}
             onClick={() => switchTab(tab)}
-            className={`font-mono text-xs lowercase tracking-[0.2em] px-3 md:px-5 py-2 border-b-2 -mb-px transition-colors min-h-[44px] ${
+            className={`font-mono text-xs lowercase tracking-[0.2em] px-2 md:px-4 lg:px-5 py-2 border-b-2 -mb-px transition-colors min-h-[44px] ${
               activeTab === tab
                 ? "border-foreground text-foreground"
                 : "border-transparent text-foreground/40 hover:text-foreground/70"
@@ -150,9 +151,9 @@ export default function ContributionsSection() {
       </div>
 
       {/* Cards */}
-      <div className="flex flex-col gap-0 flex-1">
+      <div className="flex flex-col gap-0 flex-1 min-h-0 overflow-hidden">
         {allItems.length === 0 && (
-          <p className="font-mono text-sm lowercase tracking-[0.2em] text-foreground/30 py-8">
+          <p className="font-mono text-sm lowercase tracking-[0.2em] text-foreground/30 py-6">
             nothing here yet
           </p>
         )}
@@ -178,19 +179,19 @@ export default function ContributionsSection() {
                 href={project.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col md:flex-row md:items-start md:justify-between gap-3 md:gap-12 py-6 border-b border-foreground/10 last:border-b-0"
+                className="group flex flex-col md:flex-row md:items-start md:justify-between gap-2 md:gap-8 lg:gap-12 py-4 md:py-5 lg:py-6 border-b border-foreground/10 last:border-b-0"
               >
                 <div className="flex-1">
                   <h3
-                    className={`font-black text-xl md:text-2xl lowercase tracking-[0.03em] leading-[0.95] ${accent.title} group-hover:opacity-70 transition-opacity`}
+                    className={`font-black text-xl md:text-xl lg:text-2xl lowercase tracking-[0.03em] leading-[0.95] ${accent.title} group-hover:opacity-70 transition-opacity`}
                   >
                     {project.title}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed font-light">
+                  <p className="mt-1.5 lg:mt-2 text-sm leading-relaxed font-light line-clamp-2 lg:line-clamp-none">
                     {project.description}
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {project.tech.slice(0, 5).map((t) => (
+                  <div className="mt-2 lg:mt-3 flex flex-wrap gap-1.5">
+                    {project.tech.slice(0, 4).map((t) => (
                       <span
                         key={t}
                         className="font-mono text-[10px] lowercase tracking-wider border border-foreground/20 px-1.5 py-0.5"
