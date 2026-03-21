@@ -8,7 +8,7 @@ export default function NavBar() {
 
   const links = [
     { index: 0, label: "home", icon: <Home size={16} /> },
-    { index: 1, label: "work", icon: <Briefcase size={16} /> },
+    { index: 1, label: "contributions", icon: <Briefcase size={16} /> },
     { index: 2, label: "contact", icon: <Mail size={16} /> },
   ];
 
