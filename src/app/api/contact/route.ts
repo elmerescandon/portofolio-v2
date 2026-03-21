@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const { data, error } = await getResend().emails.send({
+    const { error } = await getResend().emails.send({
       from: 'Portfolio Contact <onboarding@resend.dev>',
       to: ['elmer.escandontufino@gmail.com'],
       subject: `New Contact from ${name}${company ? ` - ${company}` : ''}`,

@@ -108,13 +108,14 @@ export default function ContributionsSection() {
   const [activeTab, setActiveTab] = useState<ContributionCategory>("work");
   const [page, setPage] = useState(0);
 
-  const allItems =
-    activeTab === "academia"
-      ? papers.filter((p) => p.category === "academia")
-      : projects.filter((p) => p.category === activeTab);
+  const isAcademia = activeTab === "academia";
+  const allItems = isAcademia
+    ? papers.filter((p) => p.category === "academia")
+    : projects.filter((p) => p.category === activeTab);
 
   const totalPages = Math.ceil(allItems.length / PAGE_SIZE);
   const pageItems = allItems.slice(page * PAGE_SIZE, page * PAGE_SIZE + PAGE_SIZE);
+  const pageProjects = isAcademia ? [] : (pageItems as import("@/data/projects").Project[]);
 
   function switchTab(tab: ContributionCategory) {
     setActiveTab(tab);
@@ -159,7 +160,7 @@ export default function ContributionsSection() {
         )}
 
         {/* Academia papers */}
-        {activeTab === "academia" &&
+        {isAcademia &&
           (pageItems as Paper[]).map((paper, index) => (
             <PaperCard
               key={paper.slug}
@@ -169,8 +170,8 @@ export default function ContributionsSection() {
           ))}
 
         {/* Work / Projects / Others */}
-        {activeTab !== "academia" &&
-          pageItems.map((project, index) => {
+        {!isAcademia &&
+          pageProjects.map((project, index) => {
             const globalIndex = page * PAGE_SIZE + index;
             const accent = accentByIndex[globalIndex % accentByIndex.length];
             return (
