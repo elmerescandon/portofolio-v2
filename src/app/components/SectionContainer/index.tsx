@@ -8,14 +8,14 @@ interface Props {
 }
 
 const TRANSITION_MS = 600;
-const COOLDOWN_MS = 900; // longer than transition to eat trackpad momentum
-const WHEEL_THRESHOLD = 30; // accumulated delta before triggering
+const COOLDOWN_MS = 900;
+const WHEEL_THRESHOLD = 30;
 const TOUCH_THRESHOLD = 50;
+const SCROLL_EDGE_TOLERANCE = 2; // px tolerance for detecting scroll boundaries
 
 export default function SectionContainer({ children }: Props) {
   const { currentSection, goToSection, totalSections } = useSectionContext();
 
-  // Use refs for everything so event handlers never need to be recreated
   const currentRef = useRef(currentSection);
   const totalRef = useRef(totalSections);
   const isTransitioning = useRef(false);
@@ -24,16 +24,40 @@ export default function SectionContainer({ children }: Props) {
   const touchStartY = useRef(0);
   const touchStartX = useRef(0);
   const goToSectionRef = useRef(goToSection);
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Keep refs in sync with state (no effect re-runs needed)
   currentRef.current = currentSection;
   totalRef.current = totalSections;
   goToSectionRef.current = goToSection;
 
-  // Single stable effect — never re-runs
+  function getCurrentSectionEl() {
+    return sectionRefs.current[currentRef.current] ?? null;
+  }
+
+  function isAtScrollTop(el: HTMLElement) {
+    return el.scrollTop <= SCROLL_EDGE_TOLERANCE;
+  }
+
+  function isAtScrollBottom(el: HTMLElement) {
+    return el.scrollTop + el.clientHeight >= el.scrollHeight - SCROLL_EDGE_TOLERANCE;
+  }
+
+  function canSectionScroll(el: HTMLElement) {
+    return el.scrollHeight > el.clientHeight + SCROLL_EDGE_TOLERANCE;
+  }
+
+  function shouldNavigate(direction: "up" | "down"): boolean {
+    const el = getCurrentSectionEl();
+    if (!el || !canSectionScroll(el)) return true;
+
+    if (direction === "down") return isAtScrollBottom(el);
+    return isAtScrollTop(el);
+  }
+
   useEffect(() => {
     function navigate(direction: "up" | "down") {
       if (isTransitioning.current) return;
+      if (!shouldNavigate(direction)) return;
 
       const cur = currentRef.current;
       const total = totalRef.current;
@@ -54,22 +78,27 @@ export default function SectionContainer({ children }: Props) {
     }
 
     function handleWheel(e: WheelEvent) {
+      const el = getCurrentSectionEl();
+      const direction = e.deltaY > 0 ? "down" : "up";
+
+      // If the section has scrollable content and isn't at the edge, let it scroll naturally
+      if (el && canSectionScroll(el) && !shouldNavigate(direction)) {
+        return;
+      }
+
       e.preventDefault();
       if (isTransitioning.current) return;
 
-      // Accumulate wheel delta — handles both trackpad (small deltas) and mouse wheel (large deltas)
       wheelAccumulator.current += e.deltaY;
 
-      // Clear accumulator after inactivity (prevents stale momentum from triggering)
       if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
       wheelTimeout.current = setTimeout(() => {
         wheelAccumulator.current = 0;
       }, 150);
 
-      // Only trigger when accumulated delta exceeds threshold
       if (Math.abs(wheelAccumulator.current) >= WHEEL_THRESHOLD) {
-        const direction = wheelAccumulator.current > 0 ? "down" : "up";
-        navigate(direction);
+        const dir = wheelAccumulator.current > 0 ? "down" : "up";
+        navigate(dir);
       }
     }
 
@@ -111,6 +140,8 @@ export default function SectionContainer({ children }: Props) {
           return;
       }
 
+      if (!shouldNavigate(direction)) return;
+
       e.preventDefault();
       navigate(direction);
     }
@@ -127,7 +158,7 @@ export default function SectionContainer({ children }: Props) {
       window.removeEventListener("keydown", handleKeyDown);
       if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
     };
-  }, []); // Empty deps — handlers use refs, never need re-registration
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="fixed inset-0 overflow-hidden">
@@ -139,7 +170,11 @@ export default function SectionContainer({ children }: Props) {
         }}
       >
         {(children as ReactNode[]).map((child, i) => (
-          <div key={i} className="h-screen overflow-hidden">
+          <div
+            key={i}
+            ref={(el) => { sectionRefs.current[i] = el; }}
+            className="h-screen overflow-y-auto"
+          >
             {child}
           </div>
         ))}

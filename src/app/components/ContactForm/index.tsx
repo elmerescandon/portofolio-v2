@@ -36,7 +36,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-lg">
+    <form onSubmit={handleSubmit} className="space-y-3 md:space-y-6 max-w-lg">
       <div>
         <label
           htmlFor="name"
@@ -52,7 +52,7 @@ export default function ContactForm() {
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, name: e.target.value }))
           }
-          className="w-full bg-transparent border-2 border-foreground/30 px-4 py-3 font-mono text-sm focus:border-accent-blue focus:outline-none transition-colors"
+          className="w-full bg-transparent border-2 border-foreground/30 px-4 py-2 md:py-3 font-mono text-sm focus:border-accent-blue focus:outline-none transition-colors"
         />
       </div>
       <div>
@@ -70,7 +70,7 @@ export default function ContactForm() {
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, email: e.target.value }))
           }
-          className="w-full bg-transparent border-2 border-foreground/30 px-4 py-3 font-mono text-sm focus:border-accent-blue focus:outline-none transition-colors"
+          className="w-full bg-transparent border-2 border-foreground/30 px-4 py-2 md:py-3 font-mono text-sm focus:border-accent-blue focus:outline-none transition-colors"
         />
       </div>
       <div>
@@ -83,12 +83,12 @@ export default function ContactForm() {
         <textarea
           id="message"
           required
-          rows={5}
+          rows={3}
           value={formData.message}
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, message: e.target.value }))
           }
-          className="w-full bg-transparent border-2 border-foreground/30 px-4 py-3 font-mono text-sm focus:border-accent-blue focus:outline-none transition-colors resize-none"
+          className="w-full bg-transparent border-2 border-foreground/30 px-4 py-2 md:py-3 font-mono text-sm focus:border-accent-blue focus:outline-none transition-colors resize-none"
         />
       </div>
       <button
